@@ -4,7 +4,7 @@
 3. Liskov Substitution Principle
 4. Interface Segregation Principle
 5. Dependency Inversion Principle
-Ở bài này, chúng ta sẽ giải quyết nguyên lý thứ 5: Dependency Inversion
+<br>Ở bài này, chúng ta sẽ giải quyết nguyên lý thứ 5: Dependency Inversion
 
 # Dependency Inversion
 __Nội dung nguyên lý__
