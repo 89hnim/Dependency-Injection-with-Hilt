@@ -4,17 +4,16 @@
 3. Liskov Substitution Principle
 4. Interface Segregation Principle
 5. Dependency Inversion Principle
-<br><br>Ở đây, chúng ta sẽ giải quyết nguyên lý thứ 5: Dependency Inversion
+Ở bài này, chúng ta sẽ giải quyết nguyên lý thứ 5: Dependency Inversion
 
 # Dependency Inversion
-<br>__Nội dung nguyên lý__
+__Nội dung nguyên lý__
 ```
 1. Các module cấp cao không nên phụ thuộc vào các module cấp thấp. Cả 2 nên phụ thuộc vào abstraction.
 2. Interface (abstraction) không nên phụ thuộc vào chi tiết, mà ngược lại. 
 (Các class giao tiếp với nhau thông qua interface, không phải thông qua implementation.)
 ```
-
-<br><br>__Ví dụ__
+__Ví dụ__
 <br>Chúng ta có 1 class Car đơn giản như sau.
 <br>Tuy nhiên class Car hiện tại đang phi phạm nguyên lý do module cấp cao là Car đang phụ thuộc vào module cấp thấp là Engine và Wheels
 ```kotlin
@@ -53,11 +52,13 @@ Vậy là đã hoàn thành __manual dependency injection__ cho class Car rồi 
 
 ## Hilt
 ### Hilt là gì
+___
 ```
 Hilt được xây dựng dựa trên 1 dependency injection framework nổi tiếng là Dagger, được hưởng lợi từ tính chính xác của thời gian biên dịch, hiệu suất thời gian chạy, khả năng mở rộng và hỗ trợ Android Studio mà Dagger cung cấp
 ```
 
 ### Thêm dependencies
+___
 Trong _build.gradle_
 ```kotlin
 buildscript {
@@ -136,10 +137,10 @@ constructor(
   private val service: AnalyticsService
 ) { ... }
 ```
-Ở đây, chúng ta vừa sử dụng __constructor injection__: cung cấp AnalyticsService cho AnalyticsAdapter. Đồng thời nói với Hilt hãy cung cấp AnalyticsAdapter cho bất cứ Android classes nào cần. 
+Ở đây, chúng ta vừa sử dụng __constructor injection__: cung cấp AnalyticsService cho AnalyticsAdapter. Đồng thời nói với Hilt hãy cung cấp AnalyticsAdapter cho bất cứ Android classes nào yêu cầu. 
 ### Hilt modules
 ___
-Đôi khi chúng ta không thể làm __constructor-inject__. Có nhiều nguyên nhân cho việc này. Ví dụ, không thể constructor-inject 1 interface. Cũng không thể constructor-inject 1 class nào đó chúng ta không sở hữu, ví dụ như các class từ thư viện bên ngoài. Trong những trường hợp này, chúng ta có thể sử dụng Hilt Modules
+Đôi khi chúng ta không thể làm __constructor-inject__ giống như trên. Có nhiều nguyên nhân cho việc này. Ví dụ, không thể constructor-inject 1 interface. Cũng không thể constructor-inject 1 class nào đó chúng ta không sở hữu, ví dụ như các class từ thư viện bên ngoài. Trong những trường hợp này, chúng ta có thể sử dụng Hilt Modules
 <br>Ví dụ 
 ```kotlin
 @InstallIn(ApplicationComponent::class)
@@ -221,6 +222,7 @@ class AnalyticsAdapter @Inject constructor(
 ```
 
 ### Generated components for Android classes
+___
 Ở ví dụ trên, chúng ta sử dụng @InstallIn(ApplicationComponent::class). Vậy nó có ý nghĩa gì
 <br>__Các Component trong Hilt__
 | Hilt Components    |  Injector for   |
@@ -263,6 +265,7 @@ __Component hierarchy__ Installing a module into a component allows its bindings
 ![Component hierarchy](https://developer.android.com/images/training/dependency-injection/hilt-hierarchy.svg)
 
 ### Inject class không được hỗ trợ bởi Hilt
+___
 Hilt hỗ trợ gần như tất cả Android classes. Tuy nhiên, chúng ta vẫn phải sử dụng field injection trong 1 vài class Hilt không hỗ trợ.
 <br>Ví dụ, Hilt không hỗ trợ __content providers__. Nếu chúng ta muốn content provider sử dụng Hilt để lấy được dependencies nào đó, cần tạo 1 interface như sau
 ```kotlin
