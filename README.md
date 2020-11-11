@@ -287,6 +287,32 @@ class ExampleContentProvider : ContentProvider() {
   }
 }
 ```
+### Viewmodel Injection
+___
+__Thêm dependency__
+```kotlin
+ implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+ kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+```
+
+__Sử dụng__
+```kotlin
+class ExampleViewModel @ViewModelInject constructor(
+  private val repository: ExampleRepository,
+  @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
+  ...
+}
+```
+1 tips khởi tạo viewmodel nhanh
+```kotlin
+@AndroidEntryPoint
+class ExampleActivity : AppCompatActivity() {
+  private val exampleViewModel: ExampleViewModel by viewModels()
+  ...
+}
+
+```
 
 # Tham khảo
 https://developer.android.com/training/dependency-injection/hilt-android#kotlin
